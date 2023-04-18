@@ -1,0 +1,563 @@
+#pragma version 4
+txn ApplicationID
+int 0
+==
+bnz main_l79
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l78
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l77
+txn OnCompletion
+int CloseOut
+==
+bnz main_l76
+txn OnCompletion
+int OptIn
+==
+bnz main_l75
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+gtxna 0 ApplicationArgs 0
+byte "withdraw"
+==
+||
+assert
+gtxn 1 TypeEnum
+int axfer
+==
+assert
+gtxn 1 XferAsset
+int 10458941
+==
+assert
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+bnz main_l74
+main_l6:
+int 0
+byte "d_amt"
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+bnz main_l73
+int 0
+byte "d_amt"
+app_local_get
+gtxn 1 AssetAmount
+-
+main_l8:
+app_local_put
+int 0
+byte "e_int"
+int 0
+byte "d_amt"
+app_local_get
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l72
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l10:
+byte "t_d"
+app_global_get
+int 0
+==
+bnz main_l71
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l70
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l13:
+int 7000
+<=
+bnz main_l66
+int 100
+int 1000
++
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l65
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l16:
+int 7000
+-
+int 10000
+*
+int 10000
+int 7000
+-
+/
++
+main_l17:
+*
+int 10000
+int 1000
+-
+*
+int 10000
+/
+*
+int 10000
+/
+app_local_put
+byte "t_d"
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+bnz main_l64
+byte "t_d"
+app_global_get
+gtxn 1 AssetAmount
+-
+main_l19:
+app_global_put
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+!
+bnz main_l63
+main_l20:
+gtxna 0 ApplicationArgs 0
+byte "deposit"
+==
+!
+bnz main_l62
+main_l21:
+byte "u_rate"
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l61
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l23:
+app_global_put
+byte "d_int_rate"
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l60
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l25:
+byte "t_d"
+app_global_get
+int 0
+==
+bnz main_l59
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l58
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l28:
+int 7000
+<=
+bnz main_l54
+int 100
+int 1000
++
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l53
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l31:
+int 7000
+-
+int 10000
+*
+int 10000
+int 7000
+-
+/
++
+main_l32:
+*
+int 10000
+int 1000
+-
+*
+int 10000
+/
+app_global_put
+byte "b_int_rate"
+byte "t_d"
+app_global_get
+int 0
+==
+bnz main_l52
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l51
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l35:
+int 7000
+<=
+bnz main_l47
+int 100
+int 1000
++
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l46
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l38:
+int 7000
+-
+int 10000
+*
+int 10000
+int 7000
+-
+/
++
+main_l39:
+app_global_put
+int 1
+bnz main_l45
+gtxna 0 ApplicationArgs 0
+byte "update_utilization_rate"
+==
+bnz main_l44
+gtxna 0 ApplicationArgs 0
+byte "query_total_deposit"
+==
+bnz main_l43
+err
+main_l43:
+gtxna 0 ApplicationArgs 0
+byte "query_total_deposit"
+==
+assert
+byte "q_t_d"
+byte "t_d"
+app_global_get
+app_global_put
+int 1
+return
+main_l44:
+gtxna 0 ApplicationArgs 0
+byte "update_utilization_rate"
+==
+assert
+txn Sender
+byte "collateral_contract"
+app_global_get
+==
+assert
+byte "u_rate"
+gtxna 0 ApplicationArgs 1
+app_global_put
+int 1
+return
+main_l45:
+int 1
+return
+main_l46:
+int 0
+b main_l38
+main_l47:
+int 100
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l50
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l49:
+int 1000
+*
+int 7000
+/
++
+b main_l39
+main_l50:
+int 0
+b main_l49
+main_l51:
+int 0
+b main_l35
+main_l52:
+int 500
+b main_l39
+main_l53:
+int 0
+b main_l31
+main_l54:
+int 100
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l57
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l56:
+int 1000
+*
+int 7000
+/
++
+b main_l32
+main_l57:
+int 0
+b main_l56
+main_l58:
+int 0
+b main_l28
+main_l59:
+int 500
+b main_l32
+main_l60:
+int 0
+b main_l25
+main_l61:
+int 0
+b main_l23
+main_l62:
+gtxn 1 AssetAmount
+int 0
+byte "d_amt"
+app_local_get
+<=
+assert
+b main_l21
+main_l63:
+gtxn 1 Receiver
+txn Sender
+==
+assert
+b main_l20
+main_l64:
+byte "t_d"
+app_global_get
+gtxn 1 AssetAmount
++
+b main_l19
+main_l65:
+int 0
+b main_l16
+main_l66:
+int 100
+byte "t_d"
+app_global_get
+int 0
+==
+byte "t_b"
+app_global_get
+int 0
+==
+||
+bnz main_l69
+byte "t_d"
+app_global_get
+int 10000
+*
+byte "t_b"
+app_global_get
+/
+main_l68:
+int 1000
+*
+int 7000
+/
++
+b main_l17
+main_l69:
+int 0
+b main_l68
+main_l70:
+int 0
+b main_l13
+main_l71:
+int 500
+b main_l17
+main_l72:
+int 0
+b main_l10
+main_l73:
+int 0
+byte "d_amt"
+app_local_get
+gtxn 1 AssetAmount
++
+b main_l8
+main_l74:
+gtxn 1 AssetAmount
+int 1000000
+>=
+assert
+b main_l6
+main_l75:
+txn NumAppArgs
+int 0
+==
+assert
+int 0
+byte "opted_in"
+int 1
+app_local_put
+int 1
+return
+main_l76:
+int 1
+return
+main_l77:
+int 1
+return
+main_l78:
+int 1
+return
+main_l79:
+byte "t_d"
+int 0
+app_global_put
+byte "u_rate"
+int 0
+app_global_put
+byte "b_int_rate"
+int 0
+app_global_put
+byte "d_int_rate"
+int 0
+app_global_put
+int 1
+return
